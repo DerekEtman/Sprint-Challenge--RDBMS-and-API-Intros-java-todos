@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserDetailsService,
     @Autowired
     private TodoRepository todorepos;
 
-//    ******* GET ALL USER TOODOO  *************************
+//    ******* GET ALL USER TOODOO  ******************************************************************************
     @Override
     public List<User> getUserTodo()
     {
@@ -41,6 +42,21 @@ public class UserServiceImpl implements UserDetailsService,
                  .iterator()
                  .forEachRemaining(list::add);
         return list;
+    }
+// ********************************** ADD USER T0D0  *******************************************************************
+    @Transactional
+    @Override
+    public void addTodoById(long userid, Todo todo)
+    {
+        userrepos.findById(userid).orElseThrow(() -> new EntityNotFoundException("User id " + userid + " not found!"));
+
+        Todo newTodo = new Todo();
+        newTodo.setDescription(todo.getDescription());
+        newTodo.setDatestarted(todo.getDatestarted());
+
+        for (Todo t : todo.getUser().getTodos()) {
+            newTodo.getUser().getTodos().add(newTodo);
+        }
     }
 
     @Transactional

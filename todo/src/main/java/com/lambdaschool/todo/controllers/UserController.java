@@ -1,5 +1,6 @@
 package com.lambdaschool.todo.controllers;
 
+import com.lambdaschool.todo.models.Todo;
 import com.lambdaschool.todo.models.User;
 import com.lambdaschool.todo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -232,5 +233,16 @@ public class UserController
     {
         userService.delete(userid);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+//    *******************************************ADD USER TODOO***************************************************
+//    POST http://localhost:2019/users/t0d0/{userid} (REPLACE 0 WITH O IN URL)
+
+    @PostMapping("/todo/{userid}")
+    public ResponseEntity<?> addTodoById(@PathVariable long userid,
+                                         @RequestBody Todo Todo)
+    {
+        userService.addTodoById(userid, Todo);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
