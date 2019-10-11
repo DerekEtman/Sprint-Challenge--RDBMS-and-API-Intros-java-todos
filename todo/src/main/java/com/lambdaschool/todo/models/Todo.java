@@ -21,16 +21,15 @@ public class Todo extends Auditable{
 
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
-    @JsonIgnoreProperties("user")
+    @JsonIgnoreProperties("todos")
     private User user;
 
     public Todo() {
     }
 
-    public Todo(String description, Date datestarted, boolean completed, User user) {
+    public Todo(String description, Date datestarted, User user) {
         this.description = description;
         this.datestarted = datestarted;
-        this.completed = completed;
         this.user = user;
     }
 

@@ -30,4 +30,6 @@ public interface UserService
 
     void addUserRole(long userid,
                      long roleid);
+
+    List<User> getUserTodo();
 }

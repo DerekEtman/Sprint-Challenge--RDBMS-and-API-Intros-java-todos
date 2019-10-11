@@ -1,4 +1,7 @@
 package com.lambdaschool.todo.repository;
 
-public interface TodoRepository {
+import com.lambdaschool.todo.models.Todo;
+import org.springframework.data.repository.CrudRepository;
+
+public interface TodoRepository extends CrudRepository<Todo, Long> {
 }
