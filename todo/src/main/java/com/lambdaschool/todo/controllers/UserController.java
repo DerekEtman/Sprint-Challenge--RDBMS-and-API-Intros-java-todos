@@ -238,7 +238,7 @@ public class UserController
 //    *******************************************ADD USER TODOO***************************************************
 //    POST http://localhost:2019/users/t0d0/{userid} (REPLACE 0 WITH O IN URL)
 
-    @PostMapping("/todo/{userid}")
+    @PostMapping(value = "/todo/{userid}", produces = {"application/json"}, consumes = {"application/json"})
     public ResponseEntity<?> addTodoById(@PathVariable long userid,
                                          @RequestBody Todo Todo)
     {

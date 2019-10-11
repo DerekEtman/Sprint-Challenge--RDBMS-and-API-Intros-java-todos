@@ -32,7 +32,7 @@ public interface UserService
     void addUserRole(long userid,
                      long roleid);
 
-    void addTodoById(long userid, Todo todo);
+    User addTodoById(long userid, Todo todo);
 
     List<User> getUserTodo();
 }

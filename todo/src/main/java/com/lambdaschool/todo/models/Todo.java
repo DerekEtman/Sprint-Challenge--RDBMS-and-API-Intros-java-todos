@@ -17,7 +17,7 @@ public class Todo extends Auditable{
 
     protected Date datestarted;
 
-    private boolean completed;
+    private boolean completed = false;
 
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)

@@ -46,18 +46,20 @@ public class UserServiceImpl implements UserDetailsService,
 // ********************************** ADD USER T0D0  *******************************************************************
     @Transactional
     @Override
-    public void addTodoById(long userid, Todo todo)
+    public User addTodoById(long userid, Todo todo)
     {
-        userrepos.findById(userid).orElseThrow(() -> new EntityNotFoundException("User id " + userid + " not found!"));
+        User user = userrepos.findById(userid).orElseThrow(() -> new EntityNotFoundException("User id " + userid + " " +
 
-        Todo newTodo = new Todo();
-        newTodo.setDescription(todo.getDescription());
-        newTodo.setDatestarted(todo.getDatestarted());
+                                                                                                     "not found!"));
+        user.getTodos().add(new Todo(todo.getDescription(), todo.getDatestarted(), user));
 
-        for (Todo t : todo.getUser().getTodos()) {
-            newTodo.getUser().getTodos().add(newTodo);
-        }
+//        Todo newTodo = new Todo();
+//        newTodo.setDescription(todo.getDescription());
+//        newTodo.setDatestarted(todo.getDatestarted());
+
+        return userrepos.save(user);
     }
+
 
     @Transactional
     @Override
